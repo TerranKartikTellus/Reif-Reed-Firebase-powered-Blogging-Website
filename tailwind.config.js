@@ -1,7 +1,12 @@
 module.exports = {
-  content: ["./src/**/*.{html,js}","./components/**/*.{html,js}"],
+  content: ["./pages/**/*.{html,js,ts,tsx}","./components/**/*.{html,js,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        'spin-slow': 'spin 5s linear infinite',
+        'spin-rev': 'spin 3s linear infinite',
+      }
+    }
   },
   plugins: [],
 }
