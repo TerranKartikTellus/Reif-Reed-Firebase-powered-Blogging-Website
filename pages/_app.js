@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast';
 import '../styles/globals.css'
 import SideNav from "/components/sideNav"
 
@@ -10,6 +11,7 @@ function MyApp({ Component, pageProps }) {
   </div>
   <div className="bg-slate-200 h-screen w-9/12">
     <Component {...pageProps} />
+    <Toaster></Toaster>
   </div>
 </main>
 
