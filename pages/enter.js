@@ -2,16 +2,17 @@ import {auth,googleAuthProvider} from '/lib/firebase';
 import { useState } from 'react';
 import Head from "/components/Head"
 
-export default function EnterPage(){
-         const user = null;
-         const username = null;
 
+import { useContext } from 'react';
+import { UserContext } from '/lib/context';
+
+export default function EnterPage(){
+      const {user,username} = useContext(UserContext);
+      
           return(
                     <main className=" flex flex-col mx-auto item-center justify-center  h-full">
                               <Head title="Login | Reif Reed" description="Log In with Google | Get your favourite reads only on Reif Reed"></Head>
-                              <div className='mx-auto py-5'>
-                                        <div className='font-thin text-4xl tracking-wider mx-auto select-none'>Lets go with</div>
-                              </div>
+                              
                               <div className="">
                               {
                                         !user && <SignIn></SignIn>
@@ -43,6 +44,9 @@ await auth.signInWithPopup(googleAuthProvider)
 
 return(
  <div className="w-full  flex flex-col  mx-auto item-center justify-center">
+           <div className='mx-auto py-5'>
+               <div className='font-thin text-4xl tracking-wider mx-auto select-none'>Lets go with</div>
+            </div>
            <div className='mx-auto'>{message}</div>
            <button className="mx-auto text-2xl scale-90 fill-gray-100 text-gray-100 hover:scale-95 hover:fill-slate-900 hover:bg-gray-100 hover:text-gray-900 tracking-widest flex flex-row justify-center items-center p-3 transition-all duration-200 ease-in-out bg-gray-900 shadow-xl hover:shadow-2xl w-3/12 " 
            onClick={signInWithGoogle}>
@@ -64,9 +68,23 @@ function SignOut(){
           );
 }
 function UserNameForm(){
+      const [message , setMessage] = useState(<InitialMsg></InitialMsg>)
           return(
-                    <div>
-                              User Name Form
+                    <div className=' flex flex-col space-y-2 mx-auto w-4/12'>
+                              <div> <img className='w-[150px] mx-auto' src="/man.svg"></img> </div>
+                              <div className='text-4xl tracking-wider mx-auto font-normal'>Username </div>
+                              <div className=' scale-90 transition-all duration-200 ease-in-out hover:scale-100 text-lg w-[340px] mx-auto tracking-wider font-sans capitalize '>
+                                    <input placeholder='TerranKartikTellus' className='pt-5 w-full bg-transparent p-1 capitalize text-center bg-opacity-40 tracking-wider text-gray-600 outline-none border-gray-900 border-b-2' type={"text"} required></input>
+                              </div>
+                              <div className='mx-auto'>{message}</div>
+                              <div className=' mx-auto w-28'>
+                                    <button className='mx-auto p-2  pl-9'>
+                                          <img className='mx-auto w-7 hover:translate-x-2 transition-all duration-200 ease-in-out' src="/rightArrow.svg"></img>
+                                    </button>
+                              </div>
                     </div>
           );
+}
+function InitialMsg(){
+      return(<h5 className='text-sm my-1 ml-1 text-right font-sans tracking-wide'>Come up with a unique name</h5>)
 }

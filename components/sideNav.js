@@ -1,12 +1,12 @@
 import Logo from "/components/Logo"
 import Link from "next/link";
 
-export default function SideNav(){
-      const user = {
-            photoUrl: "https://cdn.pixabay.com/photo/2013/10/15/09/12/flower-195893_150.jpg"
-      };
-      const username = null;
+import { useContext } from "react";
+import { UserContext } from "../lib/context";
 
+import LoadingA from "/components/loadingA"
+export default function SideNav(){
+      const {user , username} = useContext(UserContext);
           return (
 <div className="flex flex-col items-center justify-between h-full">
       <div className="">
@@ -19,7 +19,7 @@ export default function SideNav(){
                 </div>
                 
                 {
-                      username &&
+                      user && username &&
                       <div className="mt-20">
                             <Link href={`/{username}`} >
                               <a className="flex flex-col mx-auto ">
@@ -32,7 +32,7 @@ export default function SideNav(){
       </div>
       <div className=" mb-10">
                     {
-                          username && 
+                          user && username && 
                           <div className="w-full h-full">
                                 <div>
                                       <Link href="/admin">
@@ -47,7 +47,14 @@ export default function SideNav(){
                           </div>
                     }
                     {
-                      !username && 
+                          !username && 
+                          <div className="flex space-x-2 flex-row justify-center items-center">
+                                <div className="text-xl tracking-wide">Looking for a Username</div>
+                                <div className=""><LoadingA></LoadingA></div>
+                          </div>
+                    }
+                    {
+                      !username && !user &&
                       <div className="space-y-4">
                             <div className="text-center text-lg">Looks like u are new here !</div>
                             <div>

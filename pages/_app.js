@@ -2,9 +2,14 @@ import { Toaster } from 'react-hot-toast';
 import '../styles/globals.css'
 import SideNav from "/components/sideNav"
 
-function MyApp({ Component, pageProps }) {
-  return (
+import {useUserData} from "/lib/hooks.js"
+import {UserContext} from "/lib/context"
 
+function MyApp({ Component, pageProps }) {
+
+const userData = useUserData();
+return (
+<UserContext.Provider value={userData}>
 <main className="flex max-h-max flex-row items-start justify-start">  
   <div className="bg-gradient-to-b from-slate-200 via-slate-100 to-slate-200   h-screen w-3/12">
     <SideNav></SideNav>
@@ -14,7 +19,7 @@ function MyApp({ Component, pageProps }) {
     <Toaster></Toaster>
   </div>
 </main>
-
+</UserContext.Provider>
 );
 }
 
