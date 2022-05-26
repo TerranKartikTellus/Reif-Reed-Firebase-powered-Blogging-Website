@@ -26,12 +26,31 @@ export default function SideNav(){
                       user && username &&
                       <div className="mt-20">
                             <Link href={`/${username}`} >
-                              <a className="hover:contrast-125 scale-90 flex flex-col mx-auto ">
-                                  <img className="w-32 h-32 mx-auto bg-gray-800 rounded-full shadow-lg" src={`${user.photoURL}`}></img>
-                                  <div className="capitalize text-2xl text-gray-700 mt-5 font-normal tracking-widest text-center ">{user.displayName}</div>
-                                  <div className=" text-base text-gray-600 mt-1 font-normal tracking-widest text-center ">@{username}</div>
+                              <a className="hover:contrast-125 transition-all duration-300 ease-in-out scale-90 flex flex-row items-center justify-center ">
+                                  <img className="w-20 h-20 mx-auto bg-gray-800 rounded-full shadow-lg" src={`${user.photoURL}`}></img>
+                                  <div className="mx-1">
+                                        <div className="capitalize text-2xl text-gray-700 mt-5 font-normal tracking-widest text-center ">{user.displayName}</div>
+                                        <div className=" text-base text-gray-600 mt-1 font-normal tracking-widest text-center italic  ">@{username}</div>
+                                  </div>
                               </a>
                             </Link>
+                            <div className="flex flex-row px-2 pt-5 items-center justify-around">
+                                  <Link href={`/${username}/followers`}><a>
+                                  <div className="flex flex-col items-center justify-center text-center">
+                                        <div><strong>210k</strong></div>
+                                        <div>Followers</div>
+                                  </div>
+                                  </a></Link>
+                                  <div className="flex flex-col items-center justify-center text-center">
+                                        <div><strong>10k</strong></div>
+                                        <div>Likes</div>
+                                  </div>
+                                  <div className="flex flex-col items-center justify-center text-center">
+                                        <div><strong>220</strong></div>
+                                        <div>Posts</div>
+                                  </div>
+                            </div>
+                            <div className="px-10 text-sm text-gray-700 pt-6 font-medium tracking-wide text-ellipsis">Author & illustrator. My latest books — 10 AT 10, MONSTROUS: THE LORE, GORE, & SCIENCE, and THEY LOST THEIR HEADS. </div>
                             
                               
                       </div>
@@ -57,7 +76,7 @@ export default function SideNav(){
                           </div>
                     }
                     {
-                          !username && 
+                          !username && user && 
                           <div className="">
                              <div></div>
                              <div className="flex space-x-2 flex-row justify-center items-center">
