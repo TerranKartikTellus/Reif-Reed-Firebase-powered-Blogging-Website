@@ -1,10 +1,12 @@
 import {auth,googleAuthProvider} from '/lib/firebase';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Head from "/components/Head"
 
-
+import LoadingA from "/components/loadingA"
 import { useContext } from 'react';
 import { UserContext } from '/lib/context';
+import {firestore} from "/lib/firebase"
+import debounce from 'lodash.debounce';
 
 export default function EnterPage(){
       const {user,username} = useContext(UserContext);
@@ -68,23 +70,97 @@ function SignOut(){
           );
 }
 function UserNameForm(){
-      const [message , setMessage] = useState(<InitialMsg></InitialMsg>)
+      const [message , setMessage] = useState(<InitialMsg></InitialMsg>);
+      const [loading , setLoading] = useState(false);
+      const [input , setInput] = useState("");
+      const [isValid , setIsValid] = useState("");
+      const {user,username} = useContext(UserContext);
+      
+      useEffect(()=>{
+            checkUsername(input);
+      },[input]);
+
+      const checkUsername = useCallback(
+            debounce(async (username)=>{
+            if(username.length >= 3){
+                  const ref = firestore.doc(`usernames/${username}`);
+                  const {exists} = await ref.get();
+                  console.log("check made");
+                  setIsValid(!exists);
+                  setLoading(false);
+            }
+      },500),[]
+      );
+      
+
+      function onChange(e){
+            const val = e.target.value.toLowerCase();
+            const regExp = /^(?=[a-zA-Z0-9._]{3,18}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
+
+            if(val.length < 3){
+                  setInput(val);
+                  setIsValid(false);
+                  setLoading(false);
+            }
+            if(regExp.test(val)){
+                  setInput(val);
+                  setIsValid(true);
+                  setLoading(true);
+            }
+      }
+      async function onSubmit(e){
+            e.preventDefault();
+            const userDoc = firestore.doc(`users/${user.uid}`);
+            const usernameDoc = firestore.doc(`usernames/${input}`);
+
+            const batch = firestore.batch();
+            batch.set(userDoc, { username: input, 
+                        photoUrl: user.photoURL,
+                        displayName: user.displayName  
+            });
+            batch.set(usernameDoc,{uid: user.uid });
+            await batch.commit();
+
+      }
           return(
-                    <div className=' flex flex-col space-y-2 mx-auto w-4/12'>
+                <form onSubmit={onSubmit}>
+
+                    <div className=' grid grid-cols-1 transition-all duration-300 ease-in-out mx-auto w-4/12'>
                               <div> <img className='w-[150px] mx-auto' src="/man.svg"></img> </div>
                               <div className='text-4xl tracking-wider mx-auto font-normal'>Username </div>
-                              <div className=' scale-90 transition-all duration-200 ease-in-out hover:scale-100 text-lg w-[340px] mx-auto tracking-wider font-sans capitalize '>
-                                    <input placeholder='TerranKartikTellus' className='pt-5 w-full bg-transparent p-1 capitalize text-center bg-opacity-40 tracking-wider text-gray-600 outline-none border-gray-900 border-b-2' type={"text"} required></input>
+                              <div className='flex flex-row justify-center item-center scale-75 text-lg w-[340px] mx-auto tracking-wider font-sans capitalize '>
+                                    <input value={input} onChange={onChange} placeholder='between 3 to 18 characters' className='pt-32 w-full bg-transparent p-1 capitalize text-center bg-opacity-40 tracking-wider text-gray-600 outline-none border-gray-900 border-b-2' type={"text"} required></input>
+                                    <div className='group flex flex-row justify-center item-center  '>
+                                          <div className=' pt-28 flex flex-row justify-center item-center '><svg className='hover:fill-green-600 w-9 h-9' clipRule="evenodd" fillRule="evenodd" strokeLinejoin="round" strokeMiterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12.002 2.005c5.518 0 9.998 4.48 9.998 9.997 0 5.518-4.48 9.998-9.998 9.998-5.517 0-9.997-4.48-9.997-9.998 0-5.517 4.48-9.997 9.997-9.997zm0 8c-.414 0-.75.336-.75.75v5.5c0 .414.336.75.75.75s.75-.336.75-.75v-5.5c0-.414-.336-.75-.75-.75zm-.002-3c-.552 0-1 .448-1 1s.448 1 1 1 1-.448 1-1-.448-1-1-1z" fillRule="nonzero"/></svg></div>
+                                          <div className='group-hover:opacity-100 group-hover:translate-x-32 duration-300 ease-in-out transition-all opacity-0 absolute w-44 translate-x-24 translate-y- '><div className='bg-gray-900 text-gray-100 p-2 rounded tracking-wide'><strong className='tracking-wider text-lg mb-3'>Debounce</strong><br></br>Once the user stops entering input, a call is made to the server to check if it's available. Minimizing number of reads to database.   </div></div>
+                                    </div>
                               </div>
-                              <div className='mx-auto'>{message}</div>
-                              <div className=' mx-auto w-28'>
-                                    <button className='mx-auto p-2  pl-9'>
-                                          <img className='mx-auto w-7 hover:translate-x-2 transition-all duration-200 ease-in-out' src="/rightArrow.svg"></img>
+                              <div className='mx-auto '>{message}</div>
+                              
+                              <div className=' mx-auto w-28 h-[20px]'>
+                                    <span className='text-transparent '>.</span>
+                              { isValid && 
+                                    <button type='submit' onClick={onSubmit} disabled={!isValid} className='mx-auto p-2  pl-9'>
+                                      <img className='mx-auto w-7 hover:translate-x-2 transition-all duration-200 ease-in-out' src="/rightArrow.svg"></img>
                                     </button>
+                              }
+                              {
+                                !isValid &&
+                                    <div className='mx-auto'><LoadingA></LoadingA></div>
+                              }
+                              
+                              </div>
+                              
+                              <div className='bg-red-500 text-gray-100 absolute bottom-10 right-10 p-5 rounded'>
+                                    <div>message : {message}</div>
+                                    <div>loading : {loading ? "true" : "false"}</div>
+                                    <div>input : {input}</div>
+                                    <div>isValid : {isValid ? "true" : "false"}</div>
                               </div>
                     </div>
+                </form>
           );
 }
 function InitialMsg(){
-      return(<h5 className='text-sm my-1 ml-1 text-right font-sans tracking-wide'>Come up with a unique name</h5>)
+      return(<h5 className='text-sm my-1 ml-1 text-right font-sans tracking-wide'></h5>)
 }

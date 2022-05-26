@@ -6,8 +6,8 @@ import {useUserData} from "/lib/hooks.js"
 import {UserContext} from "/lib/context"
 
 function MyApp({ Component, pageProps }) {
-
-const userData = useUserData();
+  const userData = useUserData();
+  // console.log("uSer data:   ",userData.user.displayName,userData.user.email);
 return (
 <UserContext.Provider value={userData}>
 <main className="flex max-h-max flex-row items-start justify-start">  

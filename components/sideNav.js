@@ -7,6 +7,10 @@ import { UserContext } from "../lib/context";
 import LoadingA from "/components/loadingA"
 export default function SideNav(){
       const {user , username} = useContext(UserContext);
+        console.log("user data:   ",user);
+        console.log("username data:   ",username);
+        
+      // const userEmail = userData.user.email;
           return (
 <div className="flex flex-col items-center justify-between h-full">
       <div className="">
@@ -21,36 +25,45 @@ export default function SideNav(){
                 {
                       user && username &&
                       <div className="mt-20">
-                            <Link href={`/{username}`} >
-                              <a className="flex flex-col mx-auto ">
-                                  <img className="w-32 h-32 mx-auto bg-red-400 rounded-full shadow-lg" src={user?.photoUrl}></img>
-                                  <div className="capitalize text-2xl text-gray-700 mt-5 font-normal tracking-widest text-center ">{username}</div>
+                            <Link href={`/${username}`} >
+                              <a className="hover:contrast-125 scale-90 flex flex-col mx-auto ">
+                                  <img className="w-32 h-32 mx-auto bg-gray-800 rounded-full shadow-lg" src={`${user.photoURL}`}></img>
+                                  <div className="capitalize text-2xl text-gray-700 mt-5 font-normal tracking-widest text-center ">{user.displayName}</div>
+                                  <div className=" text-base text-gray-600 mt-1 font-normal tracking-widest text-center ">@{username}</div>
                               </a>
                             </Link>
+                            
+                              
                       </div>
                 }
       </div>
       <div className=" mb-10">
                     {
                           user && username && 
-                          <div className="w-full h-full">
-                                <div>
+                          <div className="w-full h-full flex flex-row items-center justify-center">
+                                <div className="">
                                       <Link href="/admin">
                                             <a >
-                                                  <div className="transition-all duration-300 ease-in-out hover:scale-100 scale-95 text-xl tracking-wide rounded p-2 space-x-2 bg-gray-900 text-gray-100 flex flex-row ">
-                                                        <div><svg className="fill-gray-100" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd"><path d="M8.071 21.586l-7.071 1.414 1.414-7.071 14.929-14.929 5.657 5.657-14.929 14.929zm-.493-.921l-4.243-4.243-1.06 5.303 5.303-1.06zm9.765-18.251l-13.3 13.301 4.242 4.242 13.301-13.3-4.243-4.243z"/></svg></div>
+                                                  <div className="transition-all duration-300 ease-in-out hover:px-4 scale-95 text-xl tracking-wide rounded p-2 px-5 space-x-2 bg-gray-900 text-gray-100 flex flex-row ">
+                                                        <div><svg className="fill-gray-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M4.021 10.688c1.208.172 2.51 1.312 2.979 1.781v-10.514c0-1.08.92-1.955 2-1.955s2 .875 2 1.955v6.058c0 .784.814.885.919.103.216-1.604 2.519-1.817 2.693.399.043.546.726.655.866.027.326-1.444 2.501-1.458 2.758.758.066.579.796.696.848.034.051-.67.281-.934.607-.934 1.098 0 2.309 2.019 2.309 4.41 0 4.295-3 4.306-3 11.19h-10c-.332-3.942-3.462-7.431-6.271-10.241-.488-.488-.729-1.052-.729-1.564 0-.93.759-1.688 2.021-1.507z"/></svg></div>
                                                         <div className="font-thin tracking-wider">Write</div>
                                                   </div>
                                             </a>
                                       </Link>
                                 </div>
+                                <div>
+
+                                </div>
                           </div>
                     }
                     {
                           !username && 
-                          <div className="flex space-x-2 flex-row justify-center items-center">
+                          <div className="">
+                             <div></div>
+                             <div className="flex space-x-2 flex-row justify-center items-center">
                                 <div className="text-xl tracking-wide">Looking for a Username</div>
                                 <div className=""><LoadingA></LoadingA></div>
+                             </div>
                           </div>
                     }
                     {
