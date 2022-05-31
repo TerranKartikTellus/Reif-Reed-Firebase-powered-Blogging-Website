@@ -10,7 +10,9 @@ import debounce from 'lodash.debounce';
 
 export default function EnterPage(){
       const {user,username} = useContext(UserContext);
-      
+      if(user && username){
+            window.location.replace(`/${username}`);
+      }
           return(
                     <main className=" flex flex-col mx-auto item-center justify-center  h-full">
                               <Head title="Login | Reif Reed" description="Log In with Google | Get your favourite reads only on Reif Reed"></Head>
@@ -23,9 +25,11 @@ export default function EnterPage(){
                               {
                                         user && !username && <UserNameForm></UserNameForm>
                               }
+                              <div className='flex flex-col item-start justify-start  h-full'>
                               {
-                                        user && username && <SignOut></SignOut>
+                                    user && username && <SignOutPage></SignOutPage>
                               }
+                              </div>
                     </main>
           );
 }
@@ -50,7 +54,7 @@ return(
                <div className='font-thin text-4xl tracking-wider mx-auto select-none'>Lets go with</div>
             </div>
            <div className='mx-auto'>{message}</div>
-           <button className="mx-auto text-2xl scale-90 fill-gray-100 text-gray-100 hover:scale-95 hover:fill-slate-900 hover:bg-gray-100 hover:text-gray-900 tracking-widest flex flex-row justify-center items-center p-3 transition-all duration-200 ease-in-out bg-gray-900 shadow-xl hover:shadow-2xl w-3/12 " 
+           <button className="select-none mx-auto text-2xl scale-90 fill-gray-100 text-gray-100 hover:scale-95 hover:fill-slate-900 hover:bg-gray-100 hover:text-gray-900 tracking-widest flex flex-row justify-center items-center p-3 transition-all duration-300 ease-in-out bg-gray-900 shadow-xl hover:shadow-2xl w-3/12 " 
            onClick={signInWithGoogle}>
                      <div className="fill-inherit"><svg className="fill-inherit h-16 w-16" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0v24h24v-24h-24zm8.667 16.667c-2.581 0-4.667-2.087-4.667-4.667s2.086-4.667 4.667-4.667c1.26 0 2.313.46 3.127 1.22l-1.267 1.22c-.347-.333-.954-.72-1.86-.72-1.593 0-2.893 1.32-2.893 2.947s1.3 2.947 2.893 2.947c1.847 0 2.54-1.327 2.647-2.013h-2.647v-1.6h4.406c.041.233.074.467.074.773 0 2.666-1.787 4.56-4.48 4.56zm11.333-4h-2v2h-1.333v-2h-2v-1.333h2v-2h1.333v2h2v1.333z"/></svg></div>
                      <div className="px-3 text-inherit" >Google</div>
@@ -58,14 +62,17 @@ return(
  </div>
  );
 }
-function SignOut(){
+function SignOutPage(){
           return(
-                    
-                      <button className='p-3 bg-gray-900 text-gray-100 text-lg tracking-wider' onClick={()=>{ auth.signOut() }}>
-                       
-                              Sign Out
-                       
+                 <div className='flex flex-col items-end justify-end'>
+                   <div className=' pt-5 pr-5'>
+                     <button className='py-3 px-4 hover:px-3 transition-all duration-300 ease-in-out scale-95 fill-gray-100  rounded  bg-gray-900 text-gray-100 text-lg tracking-wider flex flex-row items-center justify-center' onClick={()=>{ auth.signOut() }}>
+                      <div><svg className='fill-inherit mr-2 w-7 h-7' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 9.408l2.963 2.592-2.963 2.592v-1.592h-8v-2h8v-1.592zm-2-4.408v4h-8v6h8v4l8-7-8-7zm6-3c-1.787 0-3.46.474-4.911 1.295l.228.2 1.396 1.221c1.004-.456 2.114-.716 3.287-.716 4.411 0 8 3.589 8 8s-3.589 8-8 8c-1.173 0-2.283-.26-3.288-.715l-1.396 1.221-.228.2c1.452.82 3.125 1.294 4.912 1.294 5.522 0 10-4.477 10-10s-4.478-10-10-10z"/></svg></div>
+                      <div className='font-normal tracking-wide text-lg'>Sign Out</div>
                      </button>
+                   </div>
+                   <div></div>
+                 </div>
                     
           );
 }
