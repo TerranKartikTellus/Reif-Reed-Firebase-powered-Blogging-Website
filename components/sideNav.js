@@ -1,8 +1,9 @@
 import Logo from "/components/Logo"
 import Link from "next/link";
 
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../lib/context";
+import { useRouter } from "next/router";
 
 import LoadingA from "/components/loadingA"
 export default function SideNav(){
@@ -27,7 +28,10 @@ export default function SideNav(){
                       <div className="mt-20">
                             <Link href={`/${username}`} >
                               <a className="hover:contrast-125 transition-all duration-300 ease-in-out scale-90 flex flex-row items-center justify-center ">
-                                  <img className="w-20 h-20 mx-auto bg-gray-800 rounded-full shadow-lg" src={`${user.photoURL}`}></img>
+                                  <div>
+                                  <img className="border-2 hover:border-4 transition-all duration-300 ease-in-out ring-2 ring-gray-900 w-20 h-20 mx-auto bg-transparent rounded-full shadow-lg" src={`${user.photoURL}`}></img>
+                                  {/* <div className="w-20 translate-y-1 h-[2px] bg-gray-900"></div> */}
+                                  </div>
                                   <div className="mx-1">
                                         <div className="capitalize text-2xl text-gray-700 mt-5 font-normal tracking-widest text-center ">{user.displayName}</div>
                                         <div className=" text-base text-gray-600 mt-1 font-normal tracking-widest text-center italic  ">@{username}</div>
@@ -60,7 +64,7 @@ export default function SideNav(){
                     {
                           user && username && 
                           <div className="w-full h-full flex flex-row items-center justify-center">
-                                <div className="">
+                                {/* <div className="">
                                       <Link href="/admin">
                                             <a >
                                                   <div className="transition-all duration-300 ease-in-out hover:px-4 scale-95 text-xl tracking-wide rounded p-2 px-5 space-x-2 bg-gray-900 text-gray-100 flex flex-row ">
@@ -69,9 +73,9 @@ export default function SideNav(){
                                                   </div>
                                             </a>
                                       </Link>
-                                </div>
+                                </div> */}
                                 <div>
-
+                                    <Nav username={username}></Nav>
                                 </div>
                           </div>
                     }
@@ -110,5 +114,33 @@ export default function SideNav(){
       </div>
       
 </div>
+          );
+}
+function Nav({username}){
+ 
+          return (
+                    <div className=" flex flex-row px-3 items-center justify-between py-5">
+                             
+                             
+                              <div className="rounded-xl scale-95 invert bg-gray-100 shadow h-10 w-56 flex flex-row items-center justify-center">
+                                        
+                                        <Link href={`/${username}`}><a className="flex bg-gray-50 opacity-90 hover:opacity-100  flex-row hover:bg-gray-200 w-full h-full rounded-l-lg  transition-all duration-300 ease-in-out items-center justify-center space-x-1">
+                                        
+                                                  <div><svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7 22v-16h14v7.543c0 4.107-6 2.457-6 2.457s1.518 6-2.638 6h-5.362zm16-7.614v-10.386h-18v20h8.189c3.163 0 9.811-7.223 9.811-9.614zm-10 1.614h-4v-1h4v1zm6-4h-10v1h10v-1zm0-3h-10v1h10v-1zm1-7h-17v19h-2v-21h19v2z"/></svg></div>
+                                                  <div className=" text-lg tracking-wide font-medium ">Blog</div>
+                                        
+                                        </a></Link>
+                                        
+                                        <Link href={`/${username}/setting`}><a className="flex  opacity-90 hover:opacity-100 bg-gray-50 flex-row hover:bg-gray-200 w-full h-full group rounded-r-lg  transition-all duration-300 ease-in-out items-center justify-center space-x-1">
+                                                 <svg className="group-hover:rotate-90 duration-300 ease-in-out transition-all w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 13.306v-2.612l-2.452-.614c-.081-.407-.188-.805-.318-1.192l1.815-1.756-1.306-2.263-2.432.695c-.272-.309-.562-.599-.871-.871l.695-2.432-2.263-1.306-1.756 1.815c-.387-.13-.785-.237-1.192-.318l-.614-2.452h-2.612l-.614 2.452c-.407.081-.805.188-1.192.319l-1.757-1.816-2.262 1.306.695 2.433c-.309.271-.599.562-.871.87l-2.432-.695-1.306 2.262 1.815 1.757c-.13.387-.237.785-.318 1.192l-2.452.614v2.612l2.452.614c.082.407.188.805.318 1.192l-1.815 1.756 1.306 2.263 2.432-.695c.272.308.562.599.871.871l-.695 2.432 2.263 1.306 1.756-1.816c.387.131.785.237 1.192.319l.614 2.452h2.612l.614-2.452c.407-.082.805-.188 1.192-.319l1.756 1.816 2.263-1.306-.695-2.432c.309-.272.599-.563.871-.871l2.432.695 1.306-2.263-1.815-1.756c.131-.387.237-.785.318-1.192l2.452-.614zm-12 2.694c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4z"/></svg>
+                                                  <div className=" text-lg tracking-wide font-medium ">Setting</div>
+                                        
+                                        </a></Link>
+
+                              </div>
+                              <div>
+                                    {/* <div>{pathname}</div> */}
+                              </div>
+                    </div>
           );
 }
