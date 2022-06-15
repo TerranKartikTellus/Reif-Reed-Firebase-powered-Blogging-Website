@@ -25,20 +25,7 @@ export async function getServerSideProps({query}){
 export default function User({posts}){
           const {user , username} = useContext(UserContext);
           console.log(posts);
-          posts=[
-    {
-        "slug": "THE-CHANGING-WORLD-ORDER",
-        "img": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1630251271l/52962238.jpg",
-        "updatedAt": 1654592011000,
-        "uid": "E5w0b590JRW4XKcGCzpD4FYPb9U2",
-        "published": true,
-        "content": "Principles for Dealing with the Changing World Order examines history’s most turbulent economic and political periods to reveal why the times ahead will likely be radically different from those we’ve experienced in our lifetimes—but similar to those that have happened many times before.",
-        "createdAt": "Sun Jun 05 2022",
-        "username": "terrankartiktellus",
-        "heartCount": 463,
-        "title": "THE CHANGING WORLD ORDER"
-    }
-]
+ 
           return(
                     <main className="h-screen overflow-y-hidden ">
                          <Head title={`${username} | Posts`} description="Get your favourite reads only on Reif Reed"></Head>
@@ -65,7 +52,7 @@ function Posts({posts,admin}){
                     post=>(
                          <Link key={post.slug} href={`/${post.username}/${post.slug}`} >
                           <a className="h-[170px] hover:px-10 snap-start space-x-3 flex flex-row items-center justify-around  transition-all duration-300 ease-in-out bg-gradient-to-r font-normal  from-emerald-400 to-blue-200 rounded p-6 w-full ">
-                               <div className=" h-full  rounded"><Image className="rounded " width='100px' height='150px'  src={post.img}></Image></div>
+                               <div className=" h-full  rounded"><Image className="rounded " width='100px' height='150px'  src={`${post.img}`} alt={post.img}></Image></div>
                                <div className="w-11/12 h-full">
                                  <div className="">by {post.username}</div>
                                  <div className=" tracking-widest text-2xl">{post.title}</div>
