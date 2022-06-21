@@ -55,8 +55,10 @@ function Posts({posts,admin}){
                                <div className=" h-full  rounded"><Image className="rounded " width='100px' height='150px'  src={`${post.img}`} alt={post.img}></Image></div>
                                <div className="w-11/12 h-full">
                                  <div className="">by {post.username}</div>
-                                 <div className=" tracking-widest text-2xl">{post.title}</div>
-                               <div className="">{post.createdAt}</div>
+                                 <div className=" tracking-widest text-3xl ">{post.title}</div>
+                                 <div className="scale-95 mt-5">Posted on:    <strong>{new Date(post.createdAt).toUTCString()}</strong></div>
+                                 <div className="scale-95">Last Updated :<strong>{new Date(post.updatedAt).toUTCString()}</strong></div>
+                              
                               </div>
                                  
                                <div className=" space-x-2 flex flex-row items-center justify-around">

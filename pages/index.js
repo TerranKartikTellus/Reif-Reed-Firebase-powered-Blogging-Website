@@ -18,12 +18,12 @@ export default function Home(props) {
   async function getMorePosts(){
     setLoading(true);
     const last = posts[posts.length - 1];
-    const cursor = typeof last.createdAt === 'number' ? fromMillis(last.createdAt) : last.createdAt;
+    // const cursor = typeof last.createdAt === 'number' ? fromMillis(last.createdAt) : last.createdAt;
     const query = firestore.collectionGroup('posts')
       .where('published','==',true)
       .orderBy('createdAt','desc')
-      .startAfter(cursor)
-      .limit(Limit);
+      .limit(Limit)
+      // .startAfter(cursor)
 
     const newPosts = (await query.get()).docs.map( postToJSON );
     console.log('new post: ',newPosts);
@@ -69,8 +69,6 @@ function Loading({show}){
   );
 }
 function PostFeed({posts}){
-
-  
   return (
     <div className="w-full pl-10 pt-16">
       <div className=" w-auto b-red-700 text-3xl tracking-wider absolute top-5 text-gray-100 z-50  bg-gray-900 p-3">Recent Feeds</div>
@@ -80,12 +78,13 @@ function PostFeed({posts}){
       <div className=" px-2 bg-red-40 grid grid-flow-row grid-cols-2 ">
 
       {posts && posts.map(i=>(
-        <a href={`/${i.uid}`} className="flex flex-row justify-around space-x-2 items-center bg-gradient-to-r from-red-00 border-b-4 border-gray-800 hover:border-b-2 transition-all ease-in-out duration-300 scale-90 hover:scale-95 to-green-200 py-2 w-[500px] my-10 px-2" key={i.uid}>
+      
+        <a href={`/${i.username}/${i.slug}`} className="flex flex-row justify-around space-x-2 items-center bg-gradient-to-r from-red-00 border-b-4 border-gray-800 hover:border-b-2 transition-all ease-in-out duration-300 scale-90 hover:scale-95 to-green-200 py-2 w-[500px] my-10 px-2" key={i.uid}>
             <div className="w-100 h-150"><Image alt={i.title} src={i.img} width={100} height={150}></Image></div>
             <div className="h-full w-[400px]">
                 <div className="text-gray-700 text-base italic">by {i.username}</div>
                 <div className="text-2xl b-green-300 tracking-wide h-[60px]">{i.title}</div>
-                <div className="text-gray-500 text-base">Published on: {i.createdAt}</div>
+                <div className="text-gray-600 text-base">Published on: <strong>{new Date(i.createdAt).toUTCString() }</strong></div>
                 <div className="flex flex-row items-center justify-end">
                     <div>
                       <div>
@@ -103,15 +102,16 @@ function PostFeed({posts}){
 }
 const Limit = 10;
 export async function getServerSideProps(context){
-  const postsQuery = firestore.collectionGroup('posts')
+  const postsQuery = await firestore.collectionGroup('posts')
     .where('published','==',true)
     .orderBy('createdAt','desc')
     .limit(Limit);
-
+  
     const posts = (await postsQuery.get()).docs.map(postToJSON);
-    console.log('got: ',posts);
+    console.log('got: ', posts);
     return {
       props: {posts},
     }
 }
-   
+
+
