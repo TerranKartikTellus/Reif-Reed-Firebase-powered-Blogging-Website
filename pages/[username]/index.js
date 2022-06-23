@@ -10,7 +10,11 @@ export async function getServerSideProps({query}){
      let user = null;
      let posts = null;
      const userDoc = await getUserWithUsername(username);
-     
+    
+     if(!userDoc){
+          return { notFound: true };
+     }
+
      if(userDoc){
           user = userDoc.data();
           const postsQuery = userDoc.ref.collection('posts').where('published','==',true).orderBy('createdAt','desc').limit(10);
@@ -25,6 +29,7 @@ export async function getServerSideProps({query}){
 export default function User({posts}){
           const {user , username} = useContext(UserContext);
           console.log(posts);
+
  
           return(
                     <main className="h-screen overflow-y-hidden ">

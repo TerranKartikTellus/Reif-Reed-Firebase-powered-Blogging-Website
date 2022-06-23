@@ -1,7 +1,8 @@
 import { getUserWithUsername,postToJSON,firestore } from "../../lib/firebase";
 import PostContent from '/components/PostContent' 
 import { useDocumentData } from 'react-firebase-hooks/firestore';
-
+import Head from "/components/Head"
+      
 
 export default function PostOfUser(props){
   const postRef = firestore.doc(props.path);          
@@ -9,12 +10,12 @@ export default function PostOfUser(props){
   const post = realtimePost || props.post;
 
   return(
-  <main className="w-full flex flex-row items-center justify-start h-full">
-    <div className="w-10/12 clear-left mx-3 my-4 bg-gray-200 px-10 py-10">
+  <main className="w-full flex flex-row items-start overflow-y-hidden justify-start h-full">
+    <Head title={post?.title} description="Get your favourite reads only on Reif Reed"></Head>
+
+    <div className=" clear-left  bg-gray-200 overflow-y-scroll overflow-auto ">
     <PostContent post={post}></PostContent>
     </div>
-    <div className="w-2/12 text-center text-xl flex flex-row items-center justify-center space-x-3"><img src="/like.svg" className="w-10 h-10"></img> <div>{post.heartCount || 0}</div> </div>
-    
   </main>
           );
 }
