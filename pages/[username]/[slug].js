@@ -11,7 +11,7 @@ export default function PostOfUser(props){
 
   return(
   <main className="w-full flex flex-row items-start overflow-y-hidden justify-start h-full">
-    <Head title={post?.title} description="Get your favourite reads only on Reif Reed"></Head>
+    <Head title={post?.title} cardTitle={post?.title} image={post?.img} description={post?.content}></Head>
 
     <div className=" clear-left  bg-gray-200 overflow-y-scroll overflow-auto ">
     <PostContent post={post}></PostContent>

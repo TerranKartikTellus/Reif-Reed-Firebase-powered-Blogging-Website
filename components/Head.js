@@ -1,6 +1,11 @@
 import Head from "next/head"
 
-export default function HeadTag({title,description}){
+export default function HeadTag({
+   title = 'Rief Reed',
+   cardTitle = 'Rief Reed',
+   description = 'All your favourite reads only on Rief Reed',
+  image = '',
+}){
 
           return (
                     <Head>
@@ -12,15 +17,16 @@ export default function HeadTag({title,description}){
                       
 
 
-                      {/* favicon generated using svg from: https://realfavicongenerator.net/ */}
-                      <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-                      <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
-                      <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
-                      <link rel="manifest" href="/favicon/site.webmanifest" />
-                      <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5" />
-                      <meta name="msapplication-TileColor" content="#da532c" />
-                      <meta name="theme-color" content="#ffffff"></meta>
+                      <meta name="twitter:card" content="summary" />
+                      <meta name="twitter:site" content="reifreed.vercel.app" />
+                      <meta name="twitter:title" content={cardTitle} />
+                      <meta name="twitter:description" content={description} />
+                      <meta name="twitter:image" content={image} />
 
+                      <meta property="og:title" content={cardTitle} />
+                      <meta property="og:description" content={description} />
+                      <meta property="og:image" content={image} />
+                      
                     </Head>
           );
 } 
