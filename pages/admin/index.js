@@ -1,7 +1,11 @@
+import AuthCheck from "/components/AuthCheck";
+
 export default function Admin(){
           return(
                     <main>
-                              Admin
-                    </main>
+											<AuthCheck>
+												
+											</AuthCheck>
+										</main>
           );
 }
