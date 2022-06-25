@@ -8,6 +8,7 @@ export default function AuthCheck(props){
 	const {username} = useContext(UserContext);
 
 	return(
-		username ? props.children : props.fallback || <Link href="">You must be signed in</Link>
+		username ? props.children 
+		         : props.fallback || <Link href="">You must be signed in</Link>
 		);
 }
