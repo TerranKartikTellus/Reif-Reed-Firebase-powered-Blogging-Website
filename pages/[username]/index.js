@@ -56,24 +56,45 @@ function Posts({posts,admin}){
                {posts.map(
                     post=>(
                          <Link key={post.slug} href={`/${post.username}/${post.slug}`} >
-                          <a className="h-[170px] hover:px-10 snap-start space-x-3 flex flex-row items-center justify-around  transition-all duration-300 ease-in-out bg-gradient-to-r font-normal  from-emerald-400 to-blue-200 rounded p-6 w-full ">
-                               <div className=" h-full  rounded"><Image className="rounded " width='100px' height='150px'  src={`${post.img}`} alt={post.img}></Image></div>
-                               <div className="w-11/12 h-full">
+                          <a className="overflow-hidden h-[200px] group hover:h-[280px] group  snap-start space-x-3 flex flex-row items-center justify-start  transition-all duration-1000 ease-in-out  shadow-lg rounded  w-full bg-gradient-to-r from-pink-300/30 via-purple-300/30 to-indigo-400/30">
+                               <img src={post.img} className="rounded-l group-hover:opacity-95  object-center w-2/12 object-cover w-full h-full"></img>
+                               <div className="w-8/12 h-full group pt-5">
                                  <div className="">by {post.username}</div>
                                  <div className=" tracking-widest text-3xl ">{post.title}</div>
-                                 <div className="scale-95 mt-5">Posted on:    <strong>{new Date(post.createdAt).toUTCString()}</strong></div>
-                                 <div className="scale-95">Last Updated :<strong>{new Date(post.updatedAt).toUTCString()}</strong></div>
+                                 
+                                 <div className="w-[650px] bg-red-5 pt-5 group-hover:opacity-100 opacity-0  group-hover:translate-y-0 translate-y-10 transition-all duration-1000 ease-in-out absolute group-hover:relative -skew-x-12 scale-110 group-hover:scale-100 group-hover:skew-x-0">{post.content}</div>
+                                 <div className="text-xs group-hover:skew-x-12 skew-x-0 mt-14 group-hover:mt-7 transition-all duration-1000 ease-in-out">Posted on:    <strong>{new Date(post.createdAt).toUTCString()}</strong></div>
+                                 <div className="text-xs group-hover:skew-x-12 skew-x-0 ">Last Updated :<strong>{new Date(post.updatedAt).toUTCString()}</strong></div>
                               
                               </div>
                                  
-                               <div className=" space-x-2 flex flex-row items-center justify-around">
-                                  <div className="mr-5">
+                               <div className=" space-x-2 grid grid-cols-2 ">
+                                  
+                                  <div className=" hover:opacity-90">
                                     <svg className="w-7 h-7" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M17.748 10.667l.918.598v6.219l-1.225 1.184h-4.636l-1.672-1.668h-2.133v-5c2.484-.003 4.053-2.505 5.459-6.667h1.207v.527l-.666 2.064v2.743h2.748zm6.252-5.667v14c0 2.761-2.238 5-5 5h-14c-2.761 0-5-2.239-5-5v-14c0-2.761 2.239-5 5-5h14c2.762 0 5 2.239 5 5zm-4 5.542l-1.855-1.209h-1.812v-1.166l.667-2.064v-2.103h-3.498c-1.439 4.246-2.834 6.661-4.502 6.666v-.666h-5v9h5l.005-.667h1.662l1.671 1.667h5.64l2.022-1.95v-7.508z"/></svg>
                                     {post.heartCount}
                                   </div>
-                                 <a href={`/edit/${post.slug}`} className="group"><svg className="w-7 h-7 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24.001 8.534l-11.103 11.218-5.898 1.248 1.361-5.784 11.104-11.216 4.536 4.534zm-24 10.466l-.001 2h5v-2h-4.999z"/></svg>
+                                 
+                                 {/* <a href={`/edit/${post.slug}`} className="group hover:opacity-90">
+                                   <img src="/share.svg" className="w-7 h-7"></img>
+                                 <div  className="group-hover:opacity-90  opacity-0 transition-all text-base duration-300 ease-in-out">Share</div>
+                                 </a>
+                                 
+                                 <div className=" hover:opacity-90">
+                                    <img src="/eye.svg" className="w-7 h-7"></img>
+                                  {post.heartCount/2*10}
+                                </div> */}
+
+                                 <a href={`/edit/${post.slug}`} className="group hover:opacity-90"><svg className="w-7 h-7 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24.001 8.534l-11.103 11.218-5.898 1.248 1.361-5.784 11.104-11.216 4.536 4.534zm-24 10.466l-.001 2h5v-2h-4.999z"/></svg>
                                  <div  className="group-hover:opacity-90  opacity-0 transition-all text-base duration-300 ease-in-out">Edit</div>
                                  </a>
+
+                                 {/* <a href={`/edit/${post.slug}`} className="group hover:opacity-90">
+                                   <img src="/eye.svg" className="w-7 h-7"></img>
+                                 <div  className="group-hover:opacity-90  opacity-0 transition-all text-base duration-300 ease-in-out">Views</div>
+                                 </a> */}
+                                 
+
                                </div>
                           </a>
                           </Link>
