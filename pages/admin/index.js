@@ -45,7 +45,7 @@ function CreateNewPost({placeholderTitle="The Changing World Order"}){
 			createdAt: serverTimestamp(),
 			updatedAt: serverTimestamp(),
 			heartCount: Math.floor((Math.random() * 302) + 655)
-		}
+		};
 		await ref.set(data);
 		toast.success('Post created!');
 		router.push(`/admin/${slug}`)
