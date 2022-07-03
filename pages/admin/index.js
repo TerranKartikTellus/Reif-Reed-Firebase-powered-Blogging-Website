@@ -63,7 +63,7 @@ function CreateNewPost({placeholderTitle="The Changing World Order"}){
 	    <form onSubmit={createPost}>
 			<div     className="  text-xs   bg-transparent text-gray-200 translate-y-4 w-full g-red-400">Title</div>
 				<input value={title} onChange={ e=>setTitle(e.target.value) }  className="hover:shadow transition-all duration-300 ease-in-out font-normal  capitalize pl-3 pt-5 placeholder-gray-200 bg-transparent hover:bg-gray-100/10 w-full outline-none p-2 tracking-wide text-gray-100 text-lg"></input>
-				<div className=" text-xs pl-3 tracking-wide">Characters 3 > <strong className="font-medium text-lg">{title.length}</strong> >100</div>
+				<div className=" text-xs pl-3 tracking-wide">Characters <strong className="font-medium text-lg">{title.length}</strong> / 100</div>
 				<div className="flex flex-row item-center justify-center mt-5  rounded ">
 					<button disabled={!isValid} className="shadow-sm hover:shadow-lg transition-all duration-300 ease-in-out pl-3 bg-transpart text-xl bg-gray-100/30 rounded-full px-3 py-3 hover:bg-gray-100/40 ">
 						<img src="/pen.svg" className="w-9 h-9"></img>
