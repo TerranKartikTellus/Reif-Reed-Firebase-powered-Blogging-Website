@@ -54,7 +54,7 @@ export default function SideNav(){
                                         <div>Posts</div>
                                   </div>
                             </div>
-                            <div className="px-10 text-sm text-gray-700 pt-6 font-medium tracking-wide text-ellipsis">Author & illustrator. My latest books — 10 AT 10, MONSTROUS: THE LORE, GORE, & SCIENCE, and THEY LOST THEIR HEADS. </div>
+                            <div className="px-10 text-sm text-gray-700 pt-6 font-medium tracking-wide text-ellipsis">Author & illustrator. My latest books : MONSTROUS: THE LORE, GORE, & SCIENCE, and THEY LOST THEIR HEADS. </div>
                             
                               
                       </div>

@@ -14,7 +14,7 @@ export default function Admin(){
     <main className="h-full">
 		<AuthCheck>
 		 <div className="flex h-full flex-row item-center justify-start ">
-			<div className="w-8/12 h-full bg-red-400"><PostList ></PostList></div>
+			{/* <div className="w-8/12 h-full bg-red-400"><PostList ></PostList></div> */}
 			<div className="w-4/12 h-full bg-red-00"><CreateNewPost title={null}></CreateNewPost></div>
 		 </div>
     </AuthCheck>
