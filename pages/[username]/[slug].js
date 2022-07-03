@@ -14,7 +14,7 @@ export default function PostOfUser(props){
     <Head title={post?.title} cardTitle={post?.title} image={post?.img} description={post?.content}></Head>
 
     <div className=" clear-left  bg-gray-200 overflow-y-scroll overflow-auto ">
-    <PostContent post={post}></PostContent>
+    <PostContent postRef={postRef} post={post}></PostContent>
     </div>
   </main>
           );

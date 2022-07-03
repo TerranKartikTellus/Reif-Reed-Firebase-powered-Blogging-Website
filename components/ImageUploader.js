@@ -54,7 +54,7 @@ export default function ImageUploader(){
         {downloadUrl &&
         <div className=' '>
           <div className='text-lg font-medium'>Link:</div>
-        <code className=' pr-36'>{`![alt](${downloadUrl})`}</code>
+          <code className=' pr-36'>{`![alt](${downloadUrl})`}</code>
         </div>
         }
     </div>

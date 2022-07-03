@@ -1,9 +1,10 @@
 import Link from "next/link";
 import  ReactMarkdown  from 'react-markdown';
 import gfm from 'remark-gfm'
+import AuthCheck from '/components/AuthCheck'
+import HeartButton from '/components/HeartButton'
 
-
-export default function PostContent({post}){
+export default function PostContent({post,postRef}){
 	const createdAt = typeof post?.createdAt === 'number' ? 
 		new Date(post.createdAt) :
 		post.createdAt.toDate();
@@ -17,8 +18,12 @@ export default function PostContent({post}){
 	  	<div className="text-base my-2 ">{post?.content}</div>
 	   </div>
 	  <div className="w-2/12">
-	  	  <div className="w-full text-center text-xl flex flex-row items-center justify-center space-x-3"><img src="/like.svg" className="w-10 h-10"></img> <div>{post.heartCount || 0}</div> </div>
-	  		<Link href="/">
+	  	  
+				<div className="w-full text-center text-xl flex flex-row items-center justify-center space-x-3"><img src="/like.svg" className="w-10 h-10"></img> <div>{post.heartCount || 434}</div> </div>
+	  		<AuthCheck fallback={ <Link href="/enter"><button>Sign Up</button></Link> }>
+					<HeartButton postRef={postRef}></HeartButton>
+				</AuthCheck>
+				<Link href="/">
 				<a  className="text-center my-2 flex flex-row justify-center items-center space-x-1 hover:-translate-y-1 hover:opacity-95 transition-all duration-300 ease-in-out select-none hover:bg-gradient-to-r hover:from-slate-900 hover:via-slate-800 hover:to-gray-800 bg-gray-900 text-gray-100 rounded p-2 font-normal">
 	  			<svg className="fill-gray-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 12l2.021 12h7.959l2.02-12h-12zm11.384-5.766c-.644-2.371-2.81-4.234-5.385-4.234-2.528 0-4.663 1.801-5.349 4.106-.407 1.371-.038 3.117-1.65 3.403v1.491h14v-1.495c-1.564-.305-1.299-2.102-1.616-3.271zm-9.009 1.766c0-2.122 1.397-4 3.625-4 2.207 0 3.594 1.878 3.594 4h-7.219zm8.922-4.215l2.637-3.785 1.066.74-2.99 4.291c-.195-.446-.437-.86-.713-1.246z"/></svg>
 	  			<div>Buy me a coffee</div> 
