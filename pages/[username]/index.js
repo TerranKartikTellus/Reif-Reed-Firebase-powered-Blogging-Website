@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { UserContext } from "/lib/context";
 import Head from "/components/Head"
 import { getUserWithUsername,postToJSON } from "/lib/firebase";
+
 export async function getServerSideProps({query}){
      const {username} = query;
      let user = null;
@@ -85,7 +86,7 @@ function Posts({posts,admin}){
                                   {post.heartCount/2*10}
                                 </div> */}
 
-                                 <a href={`/admin/${post.slug}`} className="group hover:opacity-90"><svg className="w-7 h-7 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24.001 8.534l-11.103 11.218-5.898 1.248 1.361-5.784 11.104-11.216 4.536 4.534zm-24 10.466l-.001 2h5v-2h-4.999z"/></svg>
+                                 <a href={`/admin/${post.slug}`} className="z-50 group hover:opacity-90"><svg className="w-7 h-7 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24.001 8.534l-11.103 11.218-5.898 1.248 1.361-5.784 11.104-11.216 4.536 4.534zm-24 10.466l-.001 2h5v-2h-4.999z"/></svg>
                                  <div  className="group-hover:opacity-90  opacity-0 transition-all text-base duration-300 ease-in-out">Edit</div>
                                  </a>
 
