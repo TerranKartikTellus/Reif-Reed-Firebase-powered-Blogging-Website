@@ -14,3 +14,6 @@ Next.js | Firebase
 🚀 Security & Deployment
 
 ![alt](https://github.com/TerranKartikTellus/firebase-blog/blob/main/preview/Capture.PNG)
+
+
+“For Educational Purposes Only”
