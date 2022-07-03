@@ -3,7 +3,7 @@ import AuthCheck from "/components/AuthCheck";
 import {useDocumentDataOnce} from 'react-firebase-hooks/firestore';
 import { useRouter } from "next/router";
 import { firestore, serverTimestamp,auth } from "../../lib/firebase";
-import { useForm } from "react-hook-form";
+import { useForm, useFormState } from "react-hook-form";
 import toast from "react-hot-toast";
 import ReactMarkdown  from "react-markdown";
 import Link from "next/link"
@@ -52,9 +52,10 @@ function ManagePost(){
 }
 
 function PostForm({postRef, defaultValues, preview}){
-  const {register,handleSubmit,reset,watch , formState , errors} = useForm({defaultValues,mode:'onChange'})
+  const {register,handleSubmit,reset,watch , formState,errors} = useForm({defaultValues,mode:'onChange'})
+  const {isDirty,isValid} = formState;
   const router = useRouter();
-      
+      console.log('///',errors.mainContent);
   async function updatePost({content,mainContent,published}){
     
     await postRef.update({
@@ -82,18 +83,33 @@ function PostForm({postRef, defaultValues, preview}){
         { !preview &&  
         <div className=" w-full h-full">
           
-          <div className="relative top-10 z-50 font-medium text-xl left-10 ">Content</div>
-          <textarea  className="bg-gray-50/70 w-full h-[100px]  scale-95 px-5 pt-10 pb-6 shadow-xl  rounded outline-gray-100"  {...register('content', {register})}></textarea>
-          
+          <div className="relative top-10 z-50 font-medium text-xl left-10 ">Summary</div>
+          <textarea name="content" className="bg-gray-50/70 w-full h-[100px]  scale-95 px-5 pt-10 pb-6 shadow-xl  rounded outline-gray-100"  
+            ref={register({
+              maxLength: {value: 2000, message: "summary is too long"},
+              minLength: {value: 10, message: "summary is too short"},
+              required: {value:true, message: 'summary is required'}
+            })}></textarea>
+        
+            {errors.content && <div className="text-center text-red-400">{errors.content.message}</div>}
           <div className="relative top-10 z-50 font-medium text-xl left-10">Post Content</div>
-          <textarea  className="bg-gray-50/70 w-full h-[300px]  scale-95 px-5 pt-10 pb-6 shadow-xl  rounded outline-gray-100"  {...register('mainContent', {register})}></textarea>
+          <textarea name="mainContent" className="bg-gray-50/70 w-full h-[300px]  scale-95 px-5 pt-10 pb-6 shadow-xl  rounded outline-gray-100"  
+          ref={register({
+              maxLength: {value: 20000, message: "content is too long"},
+              minLength: {value: 10, message: "content is too short"},
+              required: {value:true, message: 'summary is required'}
+             })}></textarea>
           
-          
+          {errors.mainContent && <div className="text-center text-red-400">{errors.mainContent.message}</div>}
+        
           <fieldset className="space-x-5 w-full">
-            <input name="published" type="checkbox" {...register('published', {register})} ></input>
+            <input name="published" type="checkbox" ref={register} ></input>
             <lable className="mt-2">Published</lable>
           </fieldset>
-          <button className="bg-green-600 w-full py-2 mt-2 text-xl rounded " type="submit">Save Changes</button>
+          {/* <div>{isDirty ? 'true' : 'false'}</div>
+          <div>{isValid ? 'true' : 'false'}</div>
+           */}
+          <button disabled={!isValid || !isDirty} className="disabled:bg-gray-100 disabled:font-medium transition-all duration-300 ease-in-out hover:-translate-y-1 disabled:text-red-600 bg-green-600 w-full py-2 mt-2 text-xl rounded " type="submit">Save Changes</button>
         </div>
         }
       </form>
