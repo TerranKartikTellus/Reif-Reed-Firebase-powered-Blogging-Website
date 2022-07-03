@@ -23,7 +23,7 @@ export default function PostContent({post,postRef}){
 	  		<AuthCheck fallback={ 
 					<Link href="/enter">
 						<a  className="text-center my-2 flex flex-row scale-75 justify-center items-center space-x-1 hover:-translate-y-1 hover:opacity-95 transition-all duration-300 ease-in-out select-none hover:bg-gradient-to-r hover:from-slate-900 hover:via-slate-800 hover:to-gray-800 bg-gray-900 text-gray-100 rounded p-2 font-normal">
-	  					<svg className="invert w-8 h-8 opacity-90" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m22 12.002c0-5.517-4.48-9.997-9.998-9.997-5.517 0-9.997 4.48-9.997 9.997 0 5.518 4.48 9.998 9.997 9.998 5.518 0 9.998-4.48 9.998-9.998zm-8.211-4.843c.141-.108.3-.157.456-.157.389 0 .755.306.755.749v8.501c0 .445-.367.75-.755.75-.157 0-.316-.05-.457-.159-1.554-1.203-4.199-3.252-5.498-4.258-.184-.142-.29-.36-.29-.592 0-.23.107-.449.291-.591z" fill-rule="nonzero"/></svg>
+	  					<svg className="invert w-8 h-8 opacity-90" clipRule="evenodd" fillRule="evenodd" strokeLinejoin="round" strokeMiterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m22 12.002c0-5.517-4.48-9.997-9.998-9.997-5.517 0-9.997 4.48-9.997 9.997 0 5.518 4.48 9.998 9.997 9.998 5.518 0 9.998-4.48 9.998-9.998zm-8.211-4.843c.141-.108.3-.157.456-.157.389 0 .755.306.755.749v8.501c0 .445-.367.75-.755.75-.157 0-.316-.05-.457-.159-1.554-1.203-4.199-3.252-5.498-4.258-.184-.142-.29-.36-.29-.592 0-.23.107-.449.291-.591z" fillRule="nonzero"/></svg>
 							<div>Sign Up</div> 
 	  				</a>
 					</Link>
