@@ -7,7 +7,7 @@ import { useForm, useFormState } from "react-hook-form";
 import toast from "react-hot-toast";
 import ReactMarkdown  from "react-markdown";
 import Link from "next/link"
-
+import ImageUploader from "/components/ImageUploader.js"
 export default function EditPost(){
   return (
     <AuthCheck>
@@ -31,7 +31,7 @@ function ManagePost(){
     <div className="w-full h-full">
     {
       post && 
-      <div className="p-20 w-full h-full overflow-hidden">
+      <div className="p-20 w-full h-full overflow-x-hidden overflow-y-auto">
         <div className="text-4xl flex flex-row items-center justify-between">
           <div>{post.title}</div>
           <div className="group relative ">
@@ -70,7 +70,7 @@ function PostForm({postRef, defaultValues, preview}){
   }
 
   return(
-    <div className=" w-full h-full">
+    <div className=" w-full h-full ">
       <form className=" w-full h-full" onSubmit={handleSubmit(updatePost)}>
         {
           preview && (
@@ -81,7 +81,7 @@ function PostForm({postRef, defaultValues, preview}){
           )
         }
         { !preview &&  
-        <div className=" w-full h-full">
+        <div className=" w-full h-full pb-10">
           
           <div className="relative top-10 z-50 font-medium text-xl left-10 ">Summary</div>
           <textarea name="content" className="bg-gray-50/70 w-full h-[100px]  scale-95 px-5 pt-10 pb-6 shadow-xl  rounded outline-gray-100"  
@@ -109,7 +109,11 @@ function PostForm({postRef, defaultValues, preview}){
           {/* <div>{isDirty ? 'true' : 'false'}</div>
           <div>{isValid ? 'true' : 'false'}</div>
            */}
+           <div className="h-10 text-transparent">.</div> 
+           <ImageUploader></ImageUploader>
+            <div className="h-10 text-transparent">.</div> 
           <button disabled={!isValid || !isDirty} className="disabled:bg-gray-100 disabled:font-medium transition-all duration-300 ease-in-out hover:-translate-y-1 disabled:text-red-600 bg-green-600 w-full py-2 mt-2 text-xl rounded " type="submit">Save Changes</button>
+          <div className="h-36 text-transparent">.</div>
         </div>
         }
       </form>
