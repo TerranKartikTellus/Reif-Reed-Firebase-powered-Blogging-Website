@@ -23,5 +23,5 @@ export default function HeartButton({postRef}){
     batch.set(heartRef , {uid})
     await batch.commit();
   }
-  return  heartDoc?.exists ? (<button className="text-center w-full my-2" onClick={removeHeart}> 💔 Unheart</button>) : (<button className="text-center w-full my-2" onClick={addHeart}>💖 Heart</button>);
+  return  heartDoc?.exists ? (<button className="text-center w-full my-2 grayscale " onClick={removeHeart}> 💔 Unheart</button>) : (<button className=" grayscale text-center w-full my-2" onClick={addHeart}>💖 Heart</button>);
 }
