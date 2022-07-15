@@ -10,3 +10,27 @@ module.exports = {
   },
   plugins: [],
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 'greenish': '#BDF2D5',
+//       'grayish': '#4B5D67',
+//       'blackish': '#3C2C3E',
+//       'pinkish': '#FF06B7',

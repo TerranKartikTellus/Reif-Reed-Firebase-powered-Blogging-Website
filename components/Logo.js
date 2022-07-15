@@ -8,7 +8,7 @@ export default function logo(){
                               {/* <div className=" text-xs w-[250px] pl-1 font-medium">Find your favourite Reads only on RR</div> */}
                               </div>
                     </div>
-                              <div className="tracking-wider px-14 text-center mt-2">Discover stories, thinking, and expertise from writers on any topic.</div>
+                              <div className="tracking-wider px-14 text-center mt-2">Where good ideas find you</div>
             </>
           );
 }

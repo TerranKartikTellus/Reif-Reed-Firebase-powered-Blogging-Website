@@ -3,7 +3,7 @@ import Image from "next/image"
 import { useContext, useState } from 'react';
 import { UserContext } from '/lib/context';
 import {firestore,postToJSON} from "/lib/firebase"
-
+import Link from 'next/link'
 export default function Home(props) {
   const {user,username} = useContext(UserContext);
       if(user && !username){
@@ -37,7 +37,20 @@ export default function Home(props) {
   }
   
   return (
-   <main className="h-screen overflow-y-scroll overflow-x-hidden">
+   <main className="h-screen overflow-y-scroll overflow-x-hidden scroll-smooth">
+     <div className="flex border-b-2 border-gray-500 bg-[#FFCC8F] shadow-2xl drop-shadow-xl flex-row px-5 py-28 mb-10 items-center justify-center rounded  bg-[FAC213] ">
+        
+        <div className=" p-4 w-full flex flex-row items-center justify-center">
+          <img src="/reading.png" className="translate-y-5 w-1/3"></img>
+          <img src="/reading-book.png" className="w-1/3"></img>
+          <img src="/studying.png" className="w-1/3 translate-y-5 "></img>
+        </div>
+        <div className="w-full space-y-7 text-right">
+          <div className="text-6xl font-serif text-[#]">Stay curious.</div>
+          <div className="text-xl  font-serif text-gray-900 pl-20">Discover stories, thinking, and expertise from writers on any topic.</div>
+          <div><Link href="/enter"><a  className="hover:invert hover:translate-y-3 shadow-lg drop-shadow-lg hover:shadow-2xl duration-500 ease-in-out transition-all scale-75 tracking-widest rounded-l-full rounded-r-full p-3 bg-black text-white font-serif text-xl px-10">Start Reading</a></Link></div>
+        </div>
+      </div>
      <Head title="Reif Reed" description="Get your favourite reads only on Reif Reed"></Head>
        <div className="overflow-y-scroll ">
 
@@ -70,9 +83,13 @@ function Loading({show}){
 }
 function PostFeed({posts}){
   return (
-    <div className="w-full pl-10 pt-16">
-      <div className=" w-auto b-red-700 text-3xl tracking-wider absolute top-5 text-gray-100 z-50  bg-gray-900 p-3">Recent Feeds</div>
-      <div className=" px-2 bg-red-40 grid grid-flow-row grid-cols-2 ">1
+    <div className="w-full px-10 pt-16">
+      
+      <div className="w-[400px] b-red-700  text-3xl space-x-3 tracking-wider  scale-75 text-center text-gray-100 z-50  bg-gray-900 p-3 flex flex-row items-center justify-start">
+        <div><svg className="scale-125 fill-white " width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M8.625 0c.61 7.189-5.625 9.664-5.625 15.996 0 4.301 3.069 7.972 9 8.004 5.931.032 9-4.414 9-8.956 0-4.141-2.062-8.046-5.952-10.474.924 2.607-.306 4.988-1.501 5.808.07-3.337-1.125-8.289-4.922-10.378zm4.711 13c3.755 3.989 1.449 9-1.567 9-1.835 0-2.779-1.265-2.769-2.577.019-2.433 2.737-2.435 4.336-6.423z"/></svg></div>
+        <div className="text-center">Trending on Reif Reed</div>
+      </div>
+      <div className=" px-2 bg-red-40 grid grid-flow-row grid-cols-2 ">
        
       </div>
       <div className=" px-2 bg-red-40 grid grid-flow-row grid-cols-2 ">

@@ -82,7 +82,7 @@ export default function SideNav(){
                     {
                           !username && user && 
                           <div className="">
-                             <div></div>
+                             
                              <div className="flex space-x-2 flex-row justify-center items-center">
                                 <div className="text-xl tracking-wide">Looking for a Username</div>
                                 <div className=""><LoadingA></LoadingA></div>
@@ -92,6 +92,9 @@ export default function SideNav(){
                     {
                       !username && !user &&
                       <div className="space-y-4">
+                            <div className="mb-20 flex flex-row items-center justify-center ">
+                              <img src="/girl-power.png" className="grayscale w-44 h-44 contrast-150 "></img>
+                             </div>
                             <div className="text-center text-lg">Looks like u are new here !</div>
                             <div>
                                   <Link href="/enter">
