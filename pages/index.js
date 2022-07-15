@@ -38,7 +38,7 @@ export default function Home(props) {
   
   return (
    <main className="h-screen overflow-y-scroll overflow-x-hidden scroll-smooth">
-     <div className="flex border-b-2 border-gray-500 bg-[#FFCC8F] shadow-2xl drop-shadow-xl flex-row px-5 py-28 mb-10 items-center justify-center rounded  bg-[FAC213] ">
+     <div className="flex border-b-2 border-gray-500 bg-[#fcb359] shadow-2xl drop-shadow-xl flex-row px-5 py-28 mb-10 items-center justify-center rounded  bg-[FAC213] ">
         
         <div className=" p-4 w-full flex flex-row items-center justify-center">
           <img src="/reading.png" className="translate-y-5 w-1/3"></img>
