@@ -1,3 +1,4 @@
+![alt](https://github.com/TerranKartikTellus/Reif-Reed-Firebase-powered-Blogging-Website/blob/main/preview/reif%20demo.png)
 
 ## Reif Reed
 ### Discover stories, thinking, and expertise from writers on any topic.
